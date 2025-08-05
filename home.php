@@ -217,6 +217,8 @@ $hasil2 = mysqli_fetch_row($query2);
                               <span class="badge bg-success">Direktur</span>
                             <?php } elseif($hdata[16]=='revisi'){ ?>
                               <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span class="badge bg-warning">Direktur</span></a>
+                            <?php } elseif ($hdata[16] == 'update' && $hdata[15] != '') { ?>
+                                <span class="badge bg-secondary">Direktur</span>
                               <!-- Modal -->
                               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -242,54 +244,105 @@ $hasil2 = mysqli_fetch_row($query2);
                             <?php } ?>
                           </td>
                         </tr>
-                        <?php } } else { 
+                        <?php } } elseif ($level == 'Manager Keuangan') { 
                         $nobaris = 0;
                         $data = mysqli_query($koneksi, "SELECT permohonanbiaya.*, user.nama FROM permohonanbiaya JOIN user ON permohonanbiaya.id_user=user.id ORDER BY id DESC LIMIT 5");
                         while($hdata = mysqli_fetch_array($data)){
                           $nobaris++; ?>
                           <tr>
-                          <td><?=$nobaris?></td>
-                          <td><?=$hdata[7]?></td>
-                          <td><?=$hdata[18]?></td>
-                          <td><?=$hdata[2]?></td>
-                          <td><?=$hdata[3]?></td>
-                          <td class="text-center">
-                            <?php if($hdata[13]!=0){ ?>
-                              <span class="badge bg-success">Keuangan</span>
-                            <?php } else { ?>
-                              <span class="badge bg-danger">Keuangan</span>
-                            <?php } ?>
-                            <br>
-                            <?php if($hdata[14]!=0){ ?>
-                              <span class="badge bg-success">Direktur</span>
-                            <?php } elseif($hdata[16]=='revisi'){ ?>
-                              <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span class="badge bg-warning">Direktur</span></a>
-                              <!-- Modal -->
-                              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLongTitle">Informasi Revisi</h5>
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p><?=$hdata[15]?></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <td><?=$nobaris?></td>
+                            <td><?=$hdata[7]?></td>
+                            <td><?=$hdata[18]?></td>
+                            <td><?=$hdata[2]?></td>
+                            <td><?=$hdata[3]?></td>
+                            <td class="text-center">
+                              <?php if($hdata[13]!=0){ ?>
+                                <span class="badge bg-success">Keuangan</span>
+                              <?php } else { ?>
+                                <span class="badge bg-danger">Keuangan</span>
+                              <?php } ?>
+                              <br>
+                              <?php if($hdata[14]!=0){ ?>
+                                <span class="badge bg-success">Direktur</span>
+                              <?php } elseif($hdata[16]=='revisi'){ ?>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span class="badge bg-warning">Direktur</span></a>
+                              <?php } elseif ($hdata[16] == 'update' && $hdata[15] != '') { ?>
+                                <span class="badge bg-secondary">Direktur</span>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Informasi Revisi</h5>
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <p><?=$hdata[15]?></p>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            <?php } elseif($hdata[16]=='update' && $hdata[16]=='') { ?>
-                              <span class="badge bg-secondary">Direktur</span>
-                            <?php } else { ?>
-                              <span class="badge bg-danger">Direktur</span>
-                            <?php } ?>
-                          </td>
-                        </tr>
-                        <?php } } ?>
+                              <?php } elseif($hdata[16]=='update' && $hdata[16]=='') { ?>
+                                <span class="badge bg-secondary">Direktur</span>
+                              <?php } else { ?>
+                                <span class="badge bg-danger">Direktur</span>
+                              <?php } ?>
+                            </td>
+                          </tr>
+                        <?php } } else { 
+                        $nobaris = 0;
+                        $data = mysqli_query($koneksi, "SELECT permohonanbiaya.*, user.nama FROM permohonanbiaya JOIN user ON permohonanbiaya.id_user=user.id WHERE permohonanbiaya.idkeuangan !=0 ORDER BY id DESC LIMIT 5");
+                        while($hdata = mysqli_fetch_array($data)){
+                          $nobaris++; ?>
+                          <tr>
+                            <td><?=$nobaris?></td>
+                            <td><?=$hdata[7]?></td>
+                            <td><?=$hdata[18]?></td>
+                            <td><?=$hdata[2]?></td>
+                            <td><?=$hdata[3]?></td>
+                            <td class="text-center">
+                              <?php if($hdata[13]!=0){ ?>
+                                <span class="badge bg-success">Keuangan</span>
+                              <?php } else { ?>
+                                <span class="badge bg-danger">Keuangan</span>
+                              <?php } ?>
+                              <br>
+                              <?php if($hdata[14]!=0){ ?>
+                                <span class="badge bg-success">Direktur</span>
+                              <?php } elseif($hdata[16]=='revisi'){ ?>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span class="badge bg-warning">Direktur</span></a>
+                              <?php } elseif ($hdata[16] == 'update' && $hdata[15] != '') { ?>
+                                <span class="badge bg-secondary">Direktur</span>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Informasi Revisi</h5>
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <p><?=$hdata[15]?></p>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <?php } elseif($hdata[16]=='update' && $hdata[16]=='') { ?>
+                                <span class="badge bg-secondary">Direktur</span>
+                              <?php } else { ?>
+                                <span class="badge bg-danger">Direktur</span>
+                              <?php } ?>
+                            </td>
+                          </tr>
+                        <?php } }?>
                     </tbody>
                   </table>
                 </div>

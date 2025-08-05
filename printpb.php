@@ -96,8 +96,8 @@ $hiddirektur = mysqli_fetch_array($iddirektur);
         <div class="col-4 text-center">
             <label for="">Dibuat Oleh,</label><br>
             <img src="<?=$hdatapb[8]?>" alt=""><br>
-            <label for=""><b>( <?=$hdatapb[18]?> )</b></label><br>
-            <label for=""><?=$hdatapb[21]?></label>
+            <label for=""><b>( <?=$hdatapb[19]?> )</b></label><br>
+            <label for=""><?=$hdatapb[22]?></label>
         </div>
         <div class="col-4 text-center">
             <label for="">Diketahui Oleh,</label><br>
